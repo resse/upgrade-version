@@ -1,0 +1,10 @@
+.project
+.settings/
+.classpath
+target/
+.metadata
+/target-build
+*.iml
+.idea
+/*/target/
+greis-data-emulator/src/test/resources/stream
