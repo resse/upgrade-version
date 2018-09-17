@@ -1,0 +1,14 @@
+server:
+  port: ${APP_PORT:8181}
+  servlet:
+    context-path: ${APP_PATH:/command-adapter-v1}
+management:
+  endpoints:
+    web:
+      base-path: ${APP_PATH:/}
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "GET"
+kafka:
+  hosts: ${KAFKA_HOSTS:localhost:9092}
+  topic: ${KAFKA_TOPIC:ticket-v1}

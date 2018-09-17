@@ -1,0 +1,3 @@
+CREATE DATABASE ticket_v2;
+
+GRANT ALL PRIVILEGES ON DATABASE ticket_v2 TO ticket;

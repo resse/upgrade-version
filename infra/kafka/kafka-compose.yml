@@ -1,0 +1,26 @@
+version: '3.2'
+services:
+  zookeeper:
+    image: zookeeper:uv
+    hostname: zookeeper
+    restart: always
+    command: /opt/zookeeper/run-zookeeper.sh
+  kafka:
+    image: kafka:uv
+    hostname: kafka
+    restart: always
+    links:
+    - zookeeper:zookeeper
+    environment:
+    - ZOOKEEPER_SERVERS=zookeeper:2181
+    - KAFKA_ADVERTISED_PORT=9092
+#    - KAFKA_ADVERTISED_HOST=${HOSTNAME}
+    ports:
+    - 9092:9092
+    command: /opt/kafka/run-kafka.sh
+    depends_on:
+    - zookeeper
+networks:
+  default:
+    external:
+      name: postgresql_default

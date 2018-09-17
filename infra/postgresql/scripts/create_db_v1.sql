@@ -1,0 +1,5 @@
+CREATE DATABASE ticket_v1;
+
+CREATE USER ticket PASSWORD 'ticket';
+
+GRANT ALL PRIVILEGES ON DATABASE ticket_v1 TO ticket;

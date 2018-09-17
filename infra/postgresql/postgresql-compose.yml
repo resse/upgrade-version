@@ -1,0 +1,26 @@
+version: '3.2'
+services:
+  postgres:
+    image: postgres:alpine
+    hostname: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=example
+    volumes:
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./pg_hba.conf:/etc/postgresql/pg_hba.conf
+    command: -c "config_file=/etc/postgresql/postgresql.conf"
+  postgres-admin:
+    image: dpage/pgadmin4
+    hostname: postgres-admin
+    restart: always
+    links:
+      - postgres:postgres
+    ports:
+      - 81:80
+      - 444:443
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=example@domain.com
+      - PGADMIN_DEFAULT_PASSWORD=example

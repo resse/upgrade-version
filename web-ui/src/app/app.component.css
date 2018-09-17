@@ -1,0 +1,18 @@
+.app-card {
+  height: 90%;
+  width: 90%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.app-table-container {
+  height: 60%;
+  position: relative;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}

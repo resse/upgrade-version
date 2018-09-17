@@ -1,0 +1,21 @@
+server:
+  port: ${APP_PORT:8183}
+  servlet:
+    context-path: ${APP_PATH:/command-handler-v1}
+management:
+  endpoints:
+    web:
+      base-path: ${APP_PATH:/}
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "GET"
+kafka:
+  hosts: ${KAFKA_HOSTS:localhost:9092}
+  topic: ${KAFKA_TOPIC:ticket-v1}
+app:
+  datasource:
+    platform: "postgres"
+    jdbc-url: ${PG_URL:jdbc:postgresql://localhost:5432/ticket_v1}
+    username: ${PG_USER:ticket}
+    password: ${PG_PASSWORD:ticket}
+    maximum-pool-size: ${PG_SIZE:10}

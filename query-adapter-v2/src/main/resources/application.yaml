@@ -1,0 +1,18 @@
+server:
+  port: ${APP_PORT:8282}
+  servlet:
+    context-path: ${APP_PATH:/query-adapter-v2}
+management:
+  endpoints:
+    web:
+      base-path: ${APP_PATH:/}
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "GET"
+app:
+  datasource:
+    platform: "postgres"
+    jdbc-url: ${PG_URL:jdbc:postgresql://localhost:5432/ticket_v2}
+    username: ${PG_USER:ticket}
+    password: ${PG_PASSWORD:ticket}
+    maximum-pool-size: ${PG_SIZE:10}

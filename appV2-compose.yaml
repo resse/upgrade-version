@@ -1,0 +1,34 @@
+version: '3.2'
+services:
+  command-adapter-v2:
+    image: command-adapter-v2:latest
+    hostname: command-adapter-v2
+    restart: always
+    ports:
+      - 8281:8281
+    environment:
+      - JAVA_OPTIONS=-Xms256m -Xmx256m -server -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
+      - KAFKA_HOSTS=kafka:9092
+  command-handler-v2:
+    image: command-handler-v2:latest
+    hostname: command-handler-v2
+    restart: always
+    ports:
+    - 8283:8283
+    environment:
+    - JAVA_OPTIONS=-Xms256m -Xmx256m -server -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
+    - KAFKA_HOSTS=kafka:9092
+    - PG_URL=jdbc:postgresql://postgres:5432/ticket_v2
+  query-adapter-v2:
+    image: query-adapter-v2:latest
+    hostname: query-adapter-v2
+    restart: always
+    ports:
+    - 8282:8282
+    environment:
+    - JAVA_OPTIONS=-Xms256m -Xmx256m -server -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
+    - PG_URL=jdbc:postgresql://postgres:5432/ticket_v2
+networks:
+  default:
+    external:
+      name: postgresql_default

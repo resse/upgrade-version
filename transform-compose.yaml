@@ -1,0 +1,26 @@
+version: '3.2'
+services:
+  cmd-v1-handler-v2:
+    image: cmd-v1-handler-v2:latest
+    hostname: cmd-v1-handler-v2
+    restart: always
+    ports:
+    - 8284:8284
+    environment:
+    - JAVA_OPTIONS=-Xms256m -Xmx256m -server -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
+    - KAFKA_HOSTS=kafka:9092
+    - PG_URL=jdbc:postgresql://postgres:5432/ticket_v2
+  cmd-v2-handler-v1:
+    image: cmd-v2-handler-v1:latest
+    hostname: cmd-v2-handler-v1
+    restart: always
+    ports:
+    - 8184:8184
+    environment:
+    - JAVA_OPTIONS=-Xms256m -Xmx256m -server -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
+    - KAFKA_HOSTS=kafka:9092
+    - PG_URL=jdbc:postgresql://postgres:5432/ticket_v1
+networks:
+  default:
+    external:
+      name: postgresql_default
